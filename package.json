@@ -1,0 +1,20 @@
+{
+  "name": "npm-cachify",
+  "version": "0.0.1",
+  "description": "This package will cache all dependencies of a npm package into the cache specified.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "npm",
+    "cache",
+    "offline",
+    "offline",
+    "install",
+    "install",
+    "cachify"
+  ],
+  "author": "Chad Dotson <chad@cdotson.com>",
+  "license": "ISC"
+}
