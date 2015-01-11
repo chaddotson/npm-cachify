@@ -16,5 +16,9 @@
     "cachify"
   ],
   "author": "Chad Dotson <chad@cdotson.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "minimist": "^1.1.0",
+    "npm": "^2.1.18"
+  }
 }
