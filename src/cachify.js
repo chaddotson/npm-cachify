@@ -20,6 +20,8 @@ function cachifyPackage(packages, options) {
 
     //console.log("packages to install:", packages);
 
+    var options = options || {};
+
     var _config = {};
     var _addedPackages = [];
 
@@ -32,12 +34,10 @@ function cachifyPackage(packages, options) {
 
     var _includeDevDependencies = options.includeDevDepencencies || false;
 
-
     _load();
 
     function _load() {
         npm.load(_config, _processPackages);
-
     }
 
     function _processPackages() {
