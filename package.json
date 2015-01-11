@@ -10,15 +10,15 @@
     "npm",
     "cache",
     "offline",
-    "offline",
     "install",
     "install",
-    "cachify"
+    "cache"
   ],
   "author": "Chad Dotson <chad@cdotson.com>",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "minimist": "^1.1.0",
-    "npm": "^2.1.18"
-  }
+    "minimist": "^1.1.x",
+    "npm": "^2.1.x"
+  },
+  "bin": "./bin/cachify"
 }
