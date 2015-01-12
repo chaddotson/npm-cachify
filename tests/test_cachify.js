@@ -108,8 +108,63 @@ describe("cachify", function() {
 
     });
 
-    // it("should only process a package once.", function () {
-    //
-    // });
+    it("should only process a package once.", function () {
+
+        var repository = {
+            "level1@1.0.0": {
+                name: "level1",
+                dependencies: {
+                    "level2a": "2.0.0",
+                    "level2b": "2.0.0"
+                }
+            },
+            "level2a@2.0.0": {
+                name: "level2a",
+                dependencies: {
+                    "level2b": "2.0.0"
+                }
+            },
+            "level2b@2.0.0": {
+                name: "level2b",
+                dependencies: {
+                }
+            },
+            "level3@2.0.0": {
+                name: "level3",
+                dependencies: {
+                }
+            }
+        }
+
+        npm_mocker = {
+            load: function(config, callback) {
+                callback();
+            },
+            commands: {
+                cache: {
+                    add: function () {}
+                }
+            }
+        };
+
+        var add = sinon.stub(npm_mocker.commands.cache, "add", function(packageToAdd, b, c, d, callback) {
+            var packageInfo = repository[packageToAdd];
+            callback({}, packageInfo);
+        });
+
+
+        cachify.cachify(["level1@1.0.0"], {npm: npm_mocker});
+
+        assert.equal(add.callCount, 3)
+
+        var call = add.getCall(0);
+        assert(call.calledWith("level1@1.0.0"));
+
+        call = add.getCall(1);
+        assert(call.calledWith("level2a@2.0.0"));
+
+        call = add.getCall(2);
+        assert(call.calledWith("level2b@2.0.0"));
+    });
 
 });
