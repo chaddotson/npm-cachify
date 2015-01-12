@@ -2,42 +2,29 @@
 
 var cachify = {};
 
-
-
 exports = module.exports = cachify;
 
-
-
-var npm = require("npm");
 var fs = require("fs");
 var path = require("path");
 
-
-
-cachify.cachify = cachifyPackage;
-
-function cachifyPackage(packages, options) {
-
-    //console.log("packages to install:", packages);
+cachify.cachify = function (packages, options) {
 
     var options = options || {};
 
     var _config = {};
     var _addedPackages = [];
 
-    console.log("running...");
-
+    var _includeDevDependencies = options.includeDevDepencencies || false;
+    var _npm = options.npm || require("npm");
 
     if(options.cacheLocation) {
         _config.cache = options.cacheLocation;
     }
 
-    var _includeDevDependencies = options.includeDevDepencencies || false;
-
     _load();
 
     function _load() {
-        npm.load(_config, _processPackages);
+        _npm.load(_config, _processPackages);
     }
 
     function _processPackages() {
@@ -53,7 +40,7 @@ function cachifyPackage(packages, options) {
 
         _addedPackages.push(packageToAdd);
 
-        npm.commands.cache.add(packageToAdd,null,null,false, _packageCached)
+        _npm.commands.cache.add(packageToAdd,null,null,false, _packageCached)
     }
 
     function _packageCached(a, packageInfo) {
