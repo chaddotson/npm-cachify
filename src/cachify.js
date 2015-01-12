@@ -36,15 +36,15 @@ cachify.cachify = function (packages, options) {
             return;
         }
 
-        console.log("caching: " + packageToAdd);
+        //console.log("caching: " + packageToAdd);
 
         _addedPackages.push(packageToAdd);
 
-        _npm.commands.cache.add(packageToAdd,null,null,false, _packageCached)
+        _npm.commands.cache.add(packageToAdd, null, null, false, _packageCached)
     }
 
     function _packageCached(a, packageInfo) {
-
+        //console.log("Adding dependencies...", packageInfo.dependencies);
         for(var dep in packageInfo.dependencies) {
             //console.log("key:" + key + " val:"+ packageInfo.dependencies[key]);
             _addPackageToCache(dep + "@" + packageInfo.dependencies[dep])

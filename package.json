@@ -20,5 +20,9 @@
     "minimist": "^1.1.x",
     "npm": "^2.1.x"
   },
-  "bin": "./bin/cachify"
+  "bin": "./bin/cachify",
+  "devDependencies": {
+    "mocha": "^2.1.x",
+    "sinon": "^1.12.x"
+  }
 }
