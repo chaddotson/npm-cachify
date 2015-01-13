@@ -14,7 +14,7 @@ cachify.cachify = function (packages, options) {
     var _config = {};
     var _addedPackages = [];
 
-    var _includeDevDependencies = options.includeDevDepencencies || false;
+    var _includeDevDependencies = options.includeDevDependencies || false;
     var _npm = options.npm || require("npm");
 
     if(options.cacheLocation) {
@@ -44,15 +44,21 @@ cachify.cachify = function (packages, options) {
     }
 
     function _packageCached(a, packageInfo) {
-        //console.log("Adding dependencies...", packageInfo.dependencies);
-        for(var dep in packageInfo.dependencies) {
-            //console.log("key:" + key + " val:"+ packageInfo.dependencies[key]);
-            _addPackageToCache(dep + "@" + packageInfo.dependencies[dep])
+
+        if(!packageInfo)
+            return;
+
+        if(packageInfo.dependencies) {
+            //console.log("Adding dependencies...", packageInfo.dependencies);
+            for(var dep in packageInfo.dependencies) {
+                //console.log("key:" + key + " val:"+ packageInfo.dependencies[key]);
+                _addPackageToCache(dep + "@" + packageInfo.dependencies[dep])
+            }
         }
 
-        if(_includeDevDependencies) {
+        if(packageInfo.devDependencies && _includeDevDependencies) {
             for(var dep in packageInfo.devDependencies) {
-                //console.log("key:" + key + " val:"+ packageInfo.dependencies[key]);
+                //console.log("dep:" + key + " val:"+ packageInfo.dependencies[key]);
                 _addPackageToCache(dep + "@" + packageInfo.devDependencies[dep])
             }
         }

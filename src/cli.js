@@ -10,13 +10,9 @@ if( args._.length == 0) {
     usage();
 }
 
-
-//console.log(args);
-cachify.cachify(args._, {cacheLocation:args.cache, includeDevDepencies: false});
-
-
+cachify.cachify(args._, {cacheLocation:args.cache, includeDevDependencies: 'dev' in args});
 
 function usage() {
-    console.log("usage: cachify [--cache <directory>] package1 package2 package3")
+    console.log("usage: cachify [--cache <directory>] [--dev] package1 package2 package3")
     process.exit()
 }
