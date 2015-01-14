@@ -1,19 +1,9 @@
-// var rewire = require("rewire");
-//
-// var cachify = rewire("../src/cachify.js");
-//
-//
-// cachify.__set__("cachify._load", function() { console.log("rewired");})
-//
-// cachify.cachify(["jshint"]);
-
 
 var cachify = require("../src/cachify.js");
 var sinon = require("sinon");
 var mocha = require("mocha");
 var assert = require("assert")
 
-//var func = sinon.spy();
 
 describe("cachify", function() {
     it("should cache the package specified.", function () {
