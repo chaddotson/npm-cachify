@@ -5,6 +5,7 @@ var glob = require('glob');
 var plato = require('plato');
 // runs = require('run-sequence'),
 var plug = require('gulp-load-plugins')();
+var checkstyleFileReporter = require('jshint-checkstyle-file-reporter');
 // browserSync = require('browser-sync'),
 // paths = require('./gulp.config.json'),
 // reload = browserSync.reload,
@@ -36,9 +37,11 @@ gulp.task('jshint', function() {
 
 
 gulp.task('jshint_xml', function() {
+    process.env.JSHINT_CHECKSTYLE_FILE = 'jshint.xml'; // default: checkstyle.xml
+
     return gulp.src(['./src/*.js', './tests/*.js'])
     .pipe(plug.jshint())
-    .pipe(plug.jshint.reporter('jslint_xml'));
+    .pipe(plug.jshint.reporter(checkstyleFileReporter));
 });
 
 
