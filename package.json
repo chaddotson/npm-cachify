@@ -4,7 +4,8 @@
   "description": "This package will cache all dependencies of a npm package into the cache specified.",
   "main": "cachify.js",
   "scripts": {
-    "test": "mocha -R spec ./tests/"
+    "test": "gulp test"
+    "original_test": "mocha -R spec ./tests/"
   },
   "keywords": [
     "npm",
