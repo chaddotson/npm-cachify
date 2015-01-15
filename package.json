@@ -26,6 +26,7 @@
     "gulp": "^3.8.10",
     "gulp-jscs": "^1.4.0",
     "gulp-load-plugins": "^0.8.0",
+    "gulp-mocha": "^2.0.0",
     "gulp-plug": "^0.2.4",
     "gulp-task-listing": "^1.0.0",
     "gulp-util": "^3.0.2",

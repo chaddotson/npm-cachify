@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 // del = require('del'),
+//var mocha = require('gulp-mocha');
 var glob = require('glob');
 var plato = require('plato');
 // runs = require('run-sequence'),
@@ -22,6 +23,13 @@ gulp.task('help', plug.taskListing);
 
 gulp.task('default', ['help']);
 
+
+gulp.task('test', function () {
+    log('Run unit tests');
+
+    return gulp.src("./tests/*.js", {read:false})
+        .pipe(plug.mocha({reporter: 'spec'}));
+});
 
 gulp.task('analyze', function () {
     log('Run static analysis tools and create reports');
@@ -57,6 +65,6 @@ function startPlatoVisualizer() {
     }
 }
 
-gulp.task("test", function() {
-    log("this is a test");
-});
+// gulp.task("test", function() {
+//     log("this is a test");
+// });
