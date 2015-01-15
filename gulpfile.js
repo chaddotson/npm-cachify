@@ -9,8 +9,12 @@ var plug = require('gulp-load-plugins')();
 // paths = require('./gulp.config.json'),
 // reload = browserSync.reload,
 // env = plug.util.env,
- log = plug.util.log,
+ log = plug.util.log;
 // port = process.env.PORT || 7707;
+
+//var jshint = require('gulp-jshint');
+
+
 
 gulp.task('help', plug.taskListing);
 
@@ -24,12 +28,27 @@ gulp.task('help', plug.taskListing);
 gulp.task('default', ['help']);
 
 
+gulp.task('jshint', function() {
+    return gulp.src(['./src/*.js', './tests/*.js'])
+    .pipe(plug.jshint())
+    .pipe(plug.jshint.reporter('default'));
+});
+
+
+gulp.task('jshint_xml', function() {
+    return gulp.src(['./src/*.js', './tests/*.js'])
+    .pipe(plug.jshint())
+    .pipe(plug.jshint.reporter('jslint_xml'));
+});
+
+
 gulp.task('test', function () {
     log('Run unit tests');
 
     return gulp.src("./tests/*.js", {read:false})
         .pipe(plug.mocha({reporter: 'spec'}));
 });
+
 
 gulp.task('analyze', function () {
     log('Run static analysis tools and create reports');

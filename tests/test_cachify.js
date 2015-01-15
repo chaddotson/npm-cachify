@@ -2,7 +2,7 @@
 var cachify = require("../src/cachify.js");
 var sinon = require("sinon");
 var mocha = require("mocha");
-var assert = require("assert")
+var assert = require("assert");
 
 
 describe("cachify", function() {
@@ -61,7 +61,7 @@ describe("cachify", function() {
                 dependencies: {
                 }
             }
-        }
+        };
 
         npm_mocker = {
             load: function(config, callback) {
@@ -82,7 +82,7 @@ describe("cachify", function() {
 
         cachify.cachify(["level1@1.0.0"], {npm: npm_mocker});
 
-        assert.equal(add.callCount, 4)
+        assert.equal(add.callCount, 4);
 
         var call = add.getCall(0);
         assert(call.calledWith("level1@1.0.0"));
@@ -124,7 +124,7 @@ describe("cachify", function() {
                 dependencies: {
                 }
             }
-        }
+        };
 
         npm_mocker = {
             load: function(config, callback) {
@@ -145,7 +145,7 @@ describe("cachify", function() {
 
         cachify.cachify(["level1@1.0.0"], {npm: npm_mocker});
 
-        assert.equal(add.callCount, 3)
+        assert.equal(add.callCount, 3);
 
         var call = add.getCall(0);
         assert(call.calledWith("level1@1.0.0"));
@@ -192,7 +192,7 @@ describe("cachify", function() {
                 dependencies: {
                 }
             }
-        }
+        };
 
         npm_mocker = {
             load: function(config, callback) {
@@ -213,7 +213,7 @@ describe("cachify", function() {
 
         cachify.cachify(["level1@1.0.0"], {npm: npm_mocker});
 
-        assert.equal(add.callCount, 3)
+        assert.equal(add.callCount, 3);
 
         var call = add.getCall(0);
         assert(call.calledWith("level1@1.0.0"));
@@ -261,7 +261,7 @@ describe("cachify", function() {
                 dependencies: {
                 }
             }
-        }
+        };
 
         npm_mocker = {
             load: function(config, callback) {
@@ -282,7 +282,7 @@ describe("cachify", function() {
 
         cachify.cachify(["level1@1.0.0"], {npm: npm_mocker, includeDevDependencies: true});
 
-        assert.equal(add.callCount, 4)
+        assert.equal(add.callCount, 4);
 
         var call = add.getCall(0);
         assert(call.calledWith("level1@1.0.0"));
