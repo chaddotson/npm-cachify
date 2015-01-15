@@ -1,3 +1,5 @@
+/*jslint node: true */
+
 "use strict";
 
 var cachify = {};
@@ -9,7 +11,7 @@ var path = require("path");
 
 cachify.cachify = function (packages, options) {
 
-    var options = options || {};
+    options = options || {};
 
     var _config = {};
     var _addedPackages = [];
@@ -40,7 +42,7 @@ cachify.cachify = function (packages, options) {
 
         _addedPackages.push(packageToAdd);
 
-        _npm.commands.cache.add(packageToAdd, null, null, false, _packageCached)
+        _npm.commands.cache.add(packageToAdd, null, null, false, _packageCached);
     }
 
     function _packageCached(a, packageInfo) {
@@ -48,18 +50,19 @@ cachify.cachify = function (packages, options) {
         if(!packageInfo)
             return;
 
+        var dep;
         if(packageInfo.dependencies) {
             //console.log("Adding dependencies...", packageInfo.dependencies);
-            for(var dep in packageInfo.dependencies) {
+            for(dep in packageInfo.dependencies) {
                 //console.log("key:" + key + " val:"+ packageInfo.dependencies[key]);
-                _addPackageToCache(dep + "@" + packageInfo.dependencies[dep])
+                _addPackageToCache(dep + "@" + packageInfo.dependencies[dep]);
             }
         }
 
         if(packageInfo.devDependencies && _includeDevDependencies) {
-            for(var dep in packageInfo.devDependencies) {
+            for(dep in packageInfo.devDependencies) {
                 //console.log("dep:" + key + " val:"+ packageInfo.dependencies[key]);
-                _addPackageToCache(dep + "@" + packageInfo.devDependencies[dep])
+                _addPackageToCache(dep + "@" + packageInfo.devDependencies[dep]);
             }
         }
 
@@ -76,4 +79,4 @@ cachify.cachify = function (packages, options) {
     //     //     fs.mkdirSync(packageDir);
     //     // }
     // }
-}
+};
