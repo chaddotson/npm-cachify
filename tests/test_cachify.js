@@ -10,9 +10,7 @@ describe("cachify", function() {
         var add = sinon.spy();
 
         npm_mocker = {
-            //load: func
             load: function(config, callback) {
-                //console.log("in caller");
                 callback();
             },
             commands: {
@@ -30,7 +28,6 @@ describe("cachify", function() {
 
         cachify.cachify(["tester_pkg"], {npm: npm_mocker});
 
-        // console.log(add.getCall(0));
         assert(add.calledWith("tester_pkg"));
 
     });
