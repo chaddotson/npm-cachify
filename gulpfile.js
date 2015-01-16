@@ -4,20 +4,20 @@ var gulp = require('gulp');
 var glob = require('glob');
 var plato = require('plato');
 // runs = require('run-sequence'),
-var plug = require('gulp-load-plugins')();
+var plugins = require('gulp-load-plugins')();
 var checkstyleFileReporter = require('jshint-checkstyle-file-reporter');
 // browserSync = require('browser-sync'),
-// paths = require('./gulp.config.json'),
+var config = require('./gulp.config.json'),
 // reload = browserSync.reload,
-// env = plug.util.env,
- log = plug.util.log;
+// env = plugins.util.env,
+ log = plugins.util.log;
 // port = process.env.PORT || 7707;
 
 //var jshint = require('gulp-jshint');
 
 
 
-gulp.task('help', plug.taskListing);
+gulp.task('help', plugins.taskListing);
 
 //var taskListing = require('gulp-task-listing');
 
@@ -29,55 +29,70 @@ gulp.task('help', plug.taskListing);
 gulp.task('default', ['help']);
 
 
-gulp.task('jshint', function() {
-    return gulp.src(['./src/*.js', './tests/*.js'])
-    .pipe(plug.jshint())
-    .pipe(plug.jshint.reporter('default'));
-});
-
-
-gulp.task('jshint_xml', function() {
-    process.env.JSHINT_CHECKSTYLE_FILE = 'jshint.xml'; // default: checkstyle.xml
-
-    return gulp.src(['./src/*.js', './tests/*.js'])
-    .pipe(plug.jshint())
-    .pipe(plug.jshint.reporter(checkstyleFileReporter));
-});
-
-
 gulp.task('test', function () {
-    log('Run unit tests');
+    log('Running unit tests');
 
-    return gulp.src("./tests/*.js", {read:false})
-        .pipe(plug.mocha({reporter: 'spec'}));
+    return gulp.src(config.paths.tests, {read:false})
+        .pipe(plugins.mocha({reporter: 'spec'}));
 });
+
+
+gulp.task('jshint', function() {
+    log('Linting with jshint -> creating xml output file.');
+
+    process.env.JSHINT_CHECKSTYLE_FILE = config.paths.jshint_outfile; // default: checkstyle.xml
+
+    return gulp.src(config.paths.js)
+        .pipe(plugins.jshint())
+        .pipe(plugins.jshint.reporter(checkstyleFileReporter))
+        .pipe(plugins.jshint.reporter('default'));
+});
+
+
+// gulp.task('jscs', function () {
+//     log('Running jscs');
+//     return gulp.src(config.paths.js)
+//         .pipe(plugins.jscs('./.jscsrc'))
+//         .pipe(plugins.notify({
+//             title: 'JSCS',
+//             message: 'JSCS Passed. Let it fly!'
+//         }));
+// });
 
 
 gulp.task('analyze', function () {
     log('Run static analysis tools and create reports');
 
-    var jscs = analyzejscs(['./src/']);
-    startPlatoVisualizer();
-    return jscs;
+    //var jscs = analyzejscs(['./src/']);
+    runPlato();
+    //return jscs;
 });
 
 function analyzejscs(sources) {
     log('Running JSCS');
-    return gulp
-    .src(sources)
-    .pipe(plug.jscs('./.jscsrc'));
+    return gulp.src(sources)
+        .pipe(plugins.jscs('./.jscsrc')
+        .pipe(plugins.notify({
+            title: 'JSCS',
+            message: 'JSCS Passed. Let it fly!'
+        })));
 }
 
-function startPlatoVisualizer() {
+function runPlato() {
     log('Running Plato');
 
-    var files = glob.sync('./src/**/*.js'),
-    excludeFiles = /\/tests\.js/,
+    var files = [];
+    for(var i = 0; i < config.paths.js.length; i++) {
+        Array.prototype.push.apply(files, glob.sync(config.paths.js[i]));
+    }
+
+    console.log(files);
+    // excludeFiles = /\/tests\.js/,
     options = {
         title: 'Plato Inspections Report',
-        exclude: excludeFiles
+        // exclude: excludeFiles
     },
-    outputDir = "./plato";//paths.report;
+    outputDir = config.paths.plato_outputdir;
 
     plato.inspect(files, outputDir, options, platoCompleted);
 

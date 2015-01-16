@@ -1,0 +1,12 @@
+{
+    "paths": {
+        "js": [
+            "./src/**/*.js",
+            "./tests/**/*.js"
+        ],
+        "tests": [
+            "./tests/**/*.js"
+        ],
+        "jshint_outfile": "jshint.xml"
+    }
+}
