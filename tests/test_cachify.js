@@ -1,5 +1,3 @@
-/* jslint node: true */
-
 "use strict";
 
 var cachify = require("../src/cachify.js");
@@ -11,7 +9,7 @@ describe("cachify", function() {
     it("should cache the package specified.", function () {
         var add = sinon.spy();
 
-        var npm_mocker = {
+        var npmMocker = {
             load: function(config, callback) {
                 callback();
             },
@@ -28,7 +26,7 @@ describe("cachify", function() {
             }
         };
 
-        cachify.cachify(["tester_pkg"], {npm: npm_mocker});
+        cachify.cachify(["tester_pkg"], {npm: npmMocker});
 
         assert(add.calledWith("tester_pkg"));
 
@@ -62,7 +60,7 @@ describe("cachify", function() {
             }
         };
 
-        var npm_mocker = {
+        var npmMocker = {
             load: function(config, callback) {
                 callback();
             },
@@ -73,13 +71,13 @@ describe("cachify", function() {
             }
         };
 
-        var add = sinon.stub(npm_mocker.commands.cache, "add", function(packageToAdd, b, c, d, callback) {
+        var add = sinon.stub(npmMocker.commands.cache, "add", function(packageToAdd, b, c, d, callback) {
             var packageInfo = repository[packageToAdd];
             callback({}, packageInfo);
         });
 
 
-        cachify.cachify(["level1@1.0.0"], {npm: npm_mocker});
+        cachify.cachify(["level1@1.0.0"], {npm: npmMocker});
 
         assert.equal(add.callCount, 4);
 
@@ -125,7 +123,7 @@ describe("cachify", function() {
             }
         };
 
-        var npm_mocker = {
+        var npmMocker = {
             load: function(config, callback) {
                 callback();
             },
@@ -136,13 +134,13 @@ describe("cachify", function() {
             }
         };
 
-        var add = sinon.stub(npm_mocker.commands.cache, "add", function(packageToAdd, b, c, d, callback) {
+        var add = sinon.stub(npmMocker.commands.cache, "add", function(packageToAdd, b, c, d, callback) {
             var packageInfo = repository[packageToAdd];
             callback({}, packageInfo);
         });
 
 
-        cachify.cachify(["level1@1.0.0"], {npm: npm_mocker});
+        cachify.cachify(["level1@1.0.0"], {npm: npmMocker});
 
         assert.equal(add.callCount, 3);
 
@@ -193,7 +191,7 @@ describe("cachify", function() {
             }
         };
 
-        var npm_mocker = {
+        var npmMocker = {
             load: function(config, callback) {
                 callback();
             },
@@ -204,13 +202,13 @@ describe("cachify", function() {
             }
         };
 
-        var add = sinon.stub(npm_mocker.commands.cache, "add", function(packageToAdd, b, c, d, callback) {
+        var add = sinon.stub(npmMocker.commands.cache, "add", function(packageToAdd, b, c, d, callback) {
             var packageInfo = repository[packageToAdd];
             callback({}, packageInfo);
         });
 
 
-        cachify.cachify(["level1@1.0.0"], {npm: npm_mocker});
+        cachify.cachify(["level1@1.0.0"], {npm: npmMocker});
 
         assert.equal(add.callCount, 3);
 
@@ -262,7 +260,7 @@ describe("cachify", function() {
             }
         };
 
-        var npm_mocker = {
+        var npmMocker = {
             load: function(config, callback) {
                 callback();
             },
@@ -273,13 +271,13 @@ describe("cachify", function() {
             }
         };
 
-        var add = sinon.stub(npm_mocker.commands.cache, "add", function(packageToAdd, b, c, d, callback) {
+        var add = sinon.stub(npmMocker.commands.cache, "add", function(packageToAdd, b, c, d, callback) {
             var packageInfo = repository[packageToAdd];
             callback({}, packageInfo);
         });
 
 
-        cachify.cachify(["level1@1.0.0"], {npm: npm_mocker, includeDevDependencies: true});
+        cachify.cachify(["level1@1.0.0"], {npm: npmMocker, includeDevDependencies: true});
 
         assert.equal(add.callCount, 4);
 
@@ -310,7 +308,7 @@ describe("cachify", function() {
     //         }
     //     }
     //
-    //     npm_mocker = {
+    //     npmMocker = {
     //         load: function(config, callback) {
     //             callback();
     //         },
@@ -321,13 +319,13 @@ describe("cachify", function() {
     //         }
     //     };
     //
-    //     var add = sinon.stub(npm_mocker.commands.cache, "add", function(packageToAdd, b, c, d, callback) {
+    //     var add = sinon.stub(npmMocker.commands.cache, "add", function(packageToAdd, b, c, d, callback) {
     //         var packageInfo = repository[packageToAdd];
     //         callback({}, packageInfo);
     //     });
     //
     //
-    //     cachify.cachify(["level1@1.0.0"], {npm: npm_mocker});
+    //     cachify.cachify(["level1@1.0.0"], {npm: npmMocker});
     //
     // });
 

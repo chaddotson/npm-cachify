@@ -9,7 +9,7 @@ var checkstyleFileReporter = require('jshint-checkstyle-file-reporter');
 // browserSync = require('browser-sync'),
 // reload = browserSync.reload,
 // env = plugins.util.env,
- log = plugins.util.log;
+var log = plugins.util.log;
 // port = process.env.PORT || 7707;
 
 //var jshint = require('gulp-jshint');
@@ -99,6 +99,6 @@ function runPlato() {
 
     function platoCompleted(report) {
         var overview = plato.getOverviewReport(report);
-        log(overview.summary);
+        log(overview.reports[0].jshint);
     }
 }
