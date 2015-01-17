@@ -1,7 +1,9 @@
+/* jslint node: true */
+
+"use strict";
 
 var cachify = require("../src/cachify.js");
 var sinon = require("sinon");
-var mocha = require("mocha");
 var assert = require("assert");
 
 
@@ -9,7 +11,7 @@ describe("cachify", function() {
     it("should cache the package specified.", function () {
         var add = sinon.spy();
 
-        npm_mocker = {
+        var npm_mocker = {
             load: function(config, callback) {
                 callback();
             },
@@ -60,7 +62,7 @@ describe("cachify", function() {
             }
         };
 
-        npm_mocker = {
+        var npm_mocker = {
             load: function(config, callback) {
                 callback();
             },
@@ -123,7 +125,7 @@ describe("cachify", function() {
             }
         };
 
-        npm_mocker = {
+        var npm_mocker = {
             load: function(config, callback) {
                 callback();
             },
@@ -191,7 +193,7 @@ describe("cachify", function() {
             }
         };
 
-        npm_mocker = {
+        var npm_mocker = {
             load: function(config, callback) {
                 callback();
             },
@@ -260,7 +262,7 @@ describe("cachify", function() {
             }
         };
 
-        npm_mocker = {
+        var npm_mocker = {
             load: function(config, callback) {
                 callback();
             },

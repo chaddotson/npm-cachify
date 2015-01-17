@@ -1,4 +1,6 @@
 {
+    "reporter": "checkstyle",
+    "filePath": "jscs.xml",
     "excludeFiles": ["node_modules/**", "bower_components/**"],
     "requireCurlyBraces": [
         "if",

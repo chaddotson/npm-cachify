@@ -6,9 +6,6 @@ var cachify = {};
 
 exports = module.exports = cachify;
 
-var fs = require("fs");
-var path = require("path");
-
 cachify.cachify = function (packages, options) {
 
     options = options || {};
@@ -47,22 +44,27 @@ cachify.cachify = function (packages, options) {
 
     function _packageCached(a, packageInfo) {
 
-        if(!packageInfo)
+        if(!packageInfo) {
             return;
+        }
 
         var dep;
         if(packageInfo.dependencies) {
             //console.log("Adding dependencies...", packageInfo.dependencies);
             for(dep in packageInfo.dependencies) {
-                //console.log("key:" + key + " val:"+ packageInfo.dependencies[key]);
-                _addPackageToCache(dep + "@" + packageInfo.dependencies[dep]);
+                if(hasOwnProperty(packageInfo.dependencies, dep)) {
+                    //console.log("key:" + key + " val:"+ packageInfo.dependencies[key]);
+                    _addPackageToCache(dep + "@" + packageInfo.dependencies[dep]);
+                }
             }
         }
 
         if(packageInfo.devDependencies && _includeDevDependencies) {
             for(dep in packageInfo.devDependencies) {
-                //console.log("dep:" + key + " val:"+ packageInfo.dependencies[key]);
-                _addPackageToCache(dep + "@" + packageInfo.devDependencies[dep]);
+                if(hasOwnProperty(packageInfo.dependencies, dep)) {
+                    //console.log("dep:" + key + " val:"+ packageInfo.dependencies[key]);
+                    _addPackageToCache(dep + "@" + packageInfo.devDependencies[dep]);
+                }
             }
         }
 
