@@ -50,7 +50,7 @@ cachify.cachify = function (packages, options) {
         if(packageInfo.dependencies) {
             //console.log("Adding dependencies...", packageInfo.dependencies);
             for(dep in packageInfo.dependencies) {
-                if(hasOwnProperty(packageInfo.dependencies, dep)) {
+                if(packageInfo.dependencies.hasOwnProperty(dep)) {
                     //console.log("key:" + key + " val:"+ packageInfo.dependencies[key]);
                     _addPackageToCache(dep + "@" + packageInfo.dependencies[dep]);
                 }
@@ -59,7 +59,7 @@ cachify.cachify = function (packages, options) {
 
         if(packageInfo.devDependencies && _includeDevDependencies) {
             for(dep in packageInfo.devDependencies) {
-                if(hasOwnProperty(packageInfo.dependencies, dep)) {
+                if(packageInfo.devDependencies.hasOwnProperty(dep)) {
                     //console.log("dep:" + key + " val:"+ packageInfo.dependencies[key]);
                     _addPackageToCache(dep + "@" + packageInfo.devDependencies[dep]);
                 }
