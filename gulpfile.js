@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 // del = require('del'),
 //var mocha = require('gulp-mocha');
-var glob = require('glob');
+//var glob = require('glob');
 var plato = require('plato');
 // runs = require('run-sequence'),
 var plugins = require('gulp-load-plugins')();
@@ -57,6 +57,8 @@ gulp.task('jscs', function () {
     return gulp.src(sourceDirectories)
         .pipe(plugins.jscs())
 });
+
+gulp.task('inspect', ['jshint', 'jscs'])
 
 
 gulp.task('analyze', function () {
