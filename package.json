@@ -1,7 +1,7 @@
 {
   "name": "npm-cachify",
   "version": "0.0.1",
-  "description": "This package will cache all dependencies of a npm package into the cache specified.",
+  "description": "This package will download an npm package and all its dependencies into the cache of your choice.",
   "main": "cachify.js",
   "scripts": {
     "test": "gulp test",
