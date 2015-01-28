@@ -1,36 +1,20 @@
-var gulp = require('gulp');
-// del = require('del'),
-//var mocha = require('gulp-mocha');
-//var glob = require('glob');
-var plato = require('plato');
-// runs = require('run-sequence'),
-var plugins = require('gulp-load-plugins')();
 var checkstyleFileReporter = require('jshint-checkstyle-file-reporter');
-// browserSync = require('browser-sync'),
-// reload = browserSync.reload,
-// env = plugins.util.env,
+var gulp = require('gulp');
+var plato = require('plato');
+var plugins = require('gulp-load-plugins')();
 var log = plugins.util.log;
-// port = process.env.PORT || 7707;
 
+//var glob = require('glob');
 //var jshint = require('gulp-jshint');
-
-
+//var mocha = require('gulp-mocha');
+//var taskListing = require('gulp-task-listing');
 
 var sourceDirectories = ["./src/**/*.js", "./tests/**/*.js"];
 var testDirectories = ["./tests/**/*.js"];
 
-
 gulp.task('help', plugins.taskListing);
 
-//var taskListing = require('gulp-task-listing');
-
-// Add a task to render the output
-//gulp.task('help', taskListing);
-
-
-
 gulp.task('default', ['help']);
-
 
 gulp.task('test', function () {
     log('Running unit tests');
@@ -59,7 +43,6 @@ gulp.task('jscs', function () {
 });
 
 gulp.task('inspect', ['jshint', 'jscs'])
-
 
 gulp.task('analyze', function () {
     log('Run static analysis tools and create reports');
