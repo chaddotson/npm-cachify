@@ -1,16 +1,11 @@
-var checkstyleFileReporter = require('jshint-checkstyle-file-reporter');
-var gulp = require('gulp');
-var plato = require('plato');
-var plugins = require('gulp-load-plugins')();
-var log = plugins.util.log;
-
-//var glob = require('glob');
-//var jshint = require('gulp-jshint');
-//var mocha = require('gulp-mocha');
-//var taskListing = require('gulp-task-listing');
-
-var sourceDirectories = ["./src/**/*.js", "./tests/**/*.js"];
-var testDirectories = ["./tests/**/*.js"];
+var checkstyleFileReporter = require('jshint-checkstyle-file-reporter'),
+    gulp = require('gulp'),
+    plato = require('plato'),
+    plugins = require('gulp-load-plugins')(),
+    glob = require('glob'),
+    log = plugins.util.log,
+    sourceDirectories = ['./src/**/*.js', './tests/**/*.js'],
+    testDirectories = ['./tests/**/*.js']; //defined but never used?
 
 gulp.task('help', plugins.taskListing);
 
@@ -24,10 +19,10 @@ gulp.task('test', function () {
 });
 
 
-gulp.task('jshint', function() {
+gulp.task('jshint', function () {
     log('Linting with jshint -> creating xml output file.');
 
-    process.env.JSHINT_CHECKSTYLE_FILE = "./jshint.xml"; // default: checkstyle.xml
+    process.env.JSHINT_CHECKSTYLE_FILE = './jshint.xml'; // default: checkstyle.xml
 
     return gulp.src(sourceDirectories)
         .pipe(plugins.jshint())
@@ -38,11 +33,12 @@ gulp.task('jshint', function() {
 
 gulp.task('jscs', function () {
     log('Running jscs');
+
     return gulp.src(sourceDirectories)
-        .pipe(plugins.jscs())
+        .pipe(plugins.jscs());
 });
 
-gulp.task('inspect', ['jshint', 'jscs'])
+gulp.task('inspect', ['jshint', 'jscs']);
 
 gulp.task('analyze', function () {
     log('Run static analysis tools and create reports');
@@ -52,8 +48,9 @@ gulp.task('analyze', function () {
     //return jscs;
 });
 
-function analyzejscs(sources) {
+function analyzejscs(sources) { //defined but never used?
     log('Running JSCS');
+
     return gulp.src(sources)
         .pipe(plugins.jscs({
             configPath: './.jscsrc',
@@ -69,8 +66,10 @@ function analyzejscs(sources) {
 function runPlato() {
     log('Running Plato');
 
-    var files = [];
-    for(var i = 0; i < sourceDirectories.length; i++) {
+    var files = [],
+        i, options;
+
+    for (i = 0; i < sourceDirectories.length; i++) {
         Array.prototype.push.apply(files, glob.sync(sourceDirectories[i]));
     }
 
@@ -80,7 +79,7 @@ function runPlato() {
         // exclude: excludeFiles
     },
 
-    plato.inspect(files, "./plato", options, platoCompleted);
+    plato.inspect(files, './plato', options, platoCompleted);
 
     function platoCompleted(report) {
         var overview = plato.getOverviewReport(report);
