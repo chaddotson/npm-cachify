@@ -1,5 +1,5 @@
 /*jslint node: true */
-(function () { //feel free to remove this IIFE if you want.
+(function () {
     'use strict';
 
     var cachify = {};
@@ -9,13 +9,10 @@
     cachify.cachify = function (packages, options) {
         options = options || {};
 
-        /* these dangling _ are annoying. JavaScript IS NOT C. Reflect on scope
-         * and repent, heathen!
-         */
         var _config = {},
-            _addedPackages = [],
-            _includeDevDependencies = options.includeDevDependencies || false,
-            _npm = options.npm || require('npm');
+        var _addedPackages = [],
+        var _includeDevDependencies = options.includeDevDependencies || false,
+        var _npm = options.npm || require('npm');
 
         if(options.cacheLocation) {
             _config.cache = options.cacheLocation;

@@ -1,11 +1,11 @@
-var checkstyleFileReporter = require('jshint-checkstyle-file-reporter'),
-    gulp = require('gulp'),
-    plato = require('plato'),
-    plugins = require('gulp-load-plugins')(),
-    glob = require('glob'),
-    log = plugins.util.log,
-    sourceDirectories = ['./src/**/*.js', './tests/**/*.js'],
-    testDirectories = ['./tests/**/*.js']; //defined but never used?
+var checkstyleFileReporter = require('jshint-checkstyle-file-reporter');
+var gulp = require('gulp');
+var plato = require('plato');
+var plugins = require('gulp-load-plugins')();
+var glob = require('glob');
+var log = plugins.util.log;
+
+var sourceDirectories = ['./src/**/*.js', './tests/**/*.js'];
 
 gulp.task('help', plugins.taskListing);
 
@@ -48,7 +48,7 @@ gulp.task('analyze', function () {
     //return jscs;
 });
 
-function analyzejscs(sources) { //defined but never used?
+function analyzejscs(sources) {
     log('Running JSCS');
 
     return gulp.src(sources)

@@ -1,10 +1,11 @@
 /*jslint node: true */
-(function () { //feel free to remove this IIFE if you want.
+(function () {
     'use strict';
 
     var parseArgs = require('minimist'),
-        cachify = require('./cachify.js'),
-        args = parseArgs(process.argv.splice(2));
+    var cachify = require('./cachify.js'),
+    var args = parseArgs(process.argv.splice(2));
+
     //console.log('args', args);
 
     if (args._.length === 0) {
