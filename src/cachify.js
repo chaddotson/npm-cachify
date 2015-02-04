@@ -9,9 +9,9 @@
     cachify.cachify = function (packages, options) {
         options = options || {};
 
-        var _config = {},
-        var _addedPackages = [],
-        var _includeDevDependencies = options.includeDevDependencies || false,
+        var _config = {};
+        var _addedPackages = [];
+        var _includeDevDependencies = options.includeDevDependencies || false;
         var _npm = options.npm || require('npm');
 
         if(options.cacheLocation) {

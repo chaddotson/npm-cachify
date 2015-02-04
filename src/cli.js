@@ -2,8 +2,8 @@
 (function () {
     'use strict';
 
-    var parseArgs = require('minimist'),
-    var cachify = require('./cachify.js'),
+    var parseArgs = require('minimist');
+    var cachify = require('./cachify.js');
     var args = parseArgs(process.argv.splice(2));
 
     //console.log('args', args);
