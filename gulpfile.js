@@ -1,9 +1,9 @@
-var checkstyleFileReporter = require('jshint-checkstyle-file-reporter');
-var gulp = require('gulp');
-var plato = require('plato');
-var plugins = require('gulp-load-plugins')();
-var glob = require('glob');
-var log = plugins.util.log;
+var checkstyleFileReporter = require('jshint-checkstyle-file-reporter'),
+    glob = require('glob'),
+    gulp = require('gulp'),
+    plato = require('plato'),
+    plugins = require('gulp-load-plugins')(),
+    log = plugins.util.log;
 
 var sourceDirectories = ['./src/**/*.js', './tests/**/*.js'];
 
@@ -18,8 +18,9 @@ gulp.task('test', function () {
         .pipe(plugins.mocha({reporter: 'spec'}));
 });
 
+gulp.task('inspect', ['lint', 'plato']);
 
-gulp.task('jshint', function () {
+gulp.task('lint', function () {
     log('Linting with jshint -> creating xml output file.');
 
     process.env.JSHINT_CHECKSTYLE_FILE = './jshint.xml'; // default: checkstyle.xml
@@ -30,41 +31,8 @@ gulp.task('jshint', function () {
         .pipe(plugins.jshint.reporter('default'));
 });
 
-
-gulp.task('jscs', function () {
-    log('Running jscs');
-
-    return gulp.src(sourceDirectories)
-        .pipe(plugins.jscs());
-});
-
-gulp.task('inspect', ['jshint', 'jscs']);
-
-gulp.task('analyze', function () {
-    log('Run static analysis tools and create reports');
-
-    //var jscs = analyzejscs(['./src/']);
-    runPlato();
-    //return jscs;
-});
-
-function analyzejscs(sources) {
-    log('Running JSCS');
-
-    return gulp.src(sources)
-        .pipe(plugins.jscs({
-            configPath: './.jscsrc',
-            reporter: 'checkstyle',
-            filePath: './jscs.xml'
-        }))
-        .pipe(plugins.notify({
-            title: 'JSCS',
-            message: 'JSCS Passed. Let it fly!'
-        }));
-}
-
-function runPlato() {
-    log('Running Plato');
+gulp.task('plato', function () {
+    log('Run plato static analysis and create reports');
 
     var files = [],
         i, options;
@@ -85,4 +53,5 @@ function runPlato() {
         var overview = plato.getOverviewReport(report);
         log(overview.reports[0].jshint);
     }
-}
+
+});

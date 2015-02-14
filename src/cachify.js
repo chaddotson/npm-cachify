@@ -64,16 +64,16 @@
 
             // _addRegistryEntry(packageInfo.name);
         }
-
+        //
         // function _addRegistryEntry(packageName) {
         //
-        //     // var registry = path.join(_config.cache, 'registry.npmjs.org');
-        //     //
-        //     // var packageDir = path.join(registry, packageName);
-        //     //
-        //     // if(!fs.existsSync(packageDir)) {
-        //     //     fs.mkdirSync(packageDir);
-        //     // }
+        //     var registry = path.join(_config.cache, 'registry.npmjs.org');
+        //
+        //     var packageDir = path.join(registry, packageName);
+        //
+        //     if(!fs.existsSync(packageDir)) {
+        //         fs.mkdirSync(packageDir);
+        //     }
         // }
     };
 })();
