@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "This package will download an npm package and all its dependencies into the cache of your choice.",
   "main": "cachify.js",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/chaddotson/npm-cachify.git"
+  }
   "scripts": {
     "test": "gulp test"
   },
