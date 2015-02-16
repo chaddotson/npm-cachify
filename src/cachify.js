@@ -37,7 +37,12 @@
             _npm.commands.cache.add(packageToAdd, null, null, false, _packageCached);
         }
 
-        function _packageCached(a, packageInfo) {
+        function _packageCached(err, packageInfo) {
+            
+            if(err !== undefined) {
+                console.log("error caching package.");
+            }
+
             if (!packageInfo) {
                 return;
             }
